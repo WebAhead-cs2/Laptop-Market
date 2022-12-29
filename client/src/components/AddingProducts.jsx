@@ -7,6 +7,7 @@ export default function AddingProducts() {
     color: "",
     price: "",
     model: "",
+    category:""
   });
 
   // key -> 'name'
@@ -26,9 +27,9 @@ export default function AddingProducts() {
     }
   }
   return (
-    <div>
+    <div style={{marginTop:'40px'}}>
       <form onSubmit={submit}>
-        <fieldset>
+        <fieldset style={{width:'30%',margin:'auto'}}>
           <legend>Insert Data</legend>
           <label htmlFor="name">Name:</label>
           <input
@@ -60,7 +61,7 @@ export default function AddingProducts() {
           />
           <br />
           <br />
-          <label htmlFor="color">Color:</label>
+          {/* <label htmlFor="color">Color:</label>
           <input
             type="text"
             id="color"
@@ -80,16 +81,7 @@ export default function AddingProducts() {
           />
           <br />
           <br />
-          <label htmlFor="model">Model:</label>
-          <input
-            type="text"
-            id="model"
-            name="model"
-            value={form.model}
-            onChange={onChange("model")}
-          />
-          <br />
-          <br />
+          / */}
           <input type="submit" value="submit"   />
         </fieldset>
       </form>

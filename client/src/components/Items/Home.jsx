@@ -1,5 +1,5 @@
 import React from "react";
-
+import  "./homestyle.css";
 export default function Home() {
   const [list, setList] = React.useState([]);
 
@@ -20,18 +20,17 @@ export default function Home() {
   }, []);
   console.log(list);
   return (
-    <div>
+    <div >
+      <h2>Laptop's</h2>
       {list.map((e) => (
-        <div key={e.id}>
+       <div className="w3-container">
+        <div key={e.id} className="w3-card-4">
           <h5>{e.name}</h5>
           <img src={e.img} style={{height:'150px',width:'150px'}} />
           <p>{e.price}$</p>
-          <p>{e.model}</p>
-          <p>{e.color}</p>
-          <p>{e.brand}</p>
           <input type='button' value='Add'/>
           <input type='button' value='Read More'/>
-           
+           </div>
         </div>
       ))}
     </div>
