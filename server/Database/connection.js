@@ -12,3 +12,12 @@ const db = new pg.Pool({
 db.query("SELECT * FROM products").then((result) => console.log(result.rows));
 
 module.exports = db;
+
+
+// const cart = [{
+//   price: 2,
+//   product: 'btatat',
+//   quantity: 5
+// }]
+
+// JSON.stringify(cart)
