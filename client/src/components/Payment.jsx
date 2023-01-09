@@ -1,64 +1,57 @@
 import React from "react";
 export default function Payment() {
-  const [form, setForm] = React.useState({
-    cvv: "",
-    export_date: "",
-    id_number: "",
-    card_number: "",
-  });
-
+  const [details, setDetails] = React.useState([]);
+ 
+    const getDetails = async () => {
+      try {
+        const cartInfo = await fetch("http://localhost:4000/cart", {
+          credentials: "include",
+        });
+        const cartInfojson = await cartInfo.json();
+        console.log(cartInfojson);
+        setDetails(cartInfojson);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    React.useEffect(() => {
+      getDetails();
+    }, []);
+  
   // key -> 'name'
-  const onChange = (key) => (e) => setForm({ ...form, [key]: e.target.value });
+  const paidCart=async()=>{
+    try {
+      const cartInfo = await fetch("http://localhost:4000/payment", {
+        credentials: "include",
+        method:"POST",
+        body:JSON.stringify(details)
+      });
+     
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
+  
   return (
     <div style={{ marginTop: "40px" }}>
-      <form> 
-        <fieldset style={{ width: "30%", margin: "auto" }}>
-          <legend>Payment</legend>
-          <label htmlFor="id_number"> ID Number : </label>
-          <input
-            type="text"
-            id="id_number"
-            name="id_number"
-            value={form.id_number}
-            onChange={onChange("id_number")}
-          />
-          <br />
-          <br />
-          <label htmlFor="cvv"> Cvv : </label>
-          <input
-            type="text"
-            id="cvv"
-            name="cvv"
-            value={form.cvv}
-            onChange={onChange("cvv")}
-          />
-          <br />
-          <br />
+     {details.map((cart) => (
+        <div key={cart.id}>
+          <div>
+            {cart.products.map((e) => (
+              <div key={e.id}>
+                <h2>{e.name}</h2>
+                <p>{e.price}$</p>
+                <img src={e.img} />
+                <p>Quantity : {e.quantity}</p>
+              </div>
+            ))}
+          </div>
+          <div>Total price : {cart.total_price}$</div>
+        </div>
+      ))}
 
-          <label htmlFor="export_date">Export Date : </label>
-          <input
-            type="date"
-            id="export_date"
-            name="export_date"
-            value={form.export_date}
-            onChange={onChange("export_date")}
-          />
-          <br />
-          <br />
-          <label htmlFor="card_number">Card Number : </label>
-          <input
-            type="text"
-            id="card_number"
-            name="card_number"
-            value={form.card_number}
-            onChange={onChange("card_number")}
-          />
-          <br />
-          <br />
-          <input type="submit" value="Pay" />
-        </fieldset>
-      </form>
+      <input type="submit" value="Pay"onClick={paidCart} />
     </div>
   );
 }

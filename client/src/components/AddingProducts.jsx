@@ -7,12 +7,11 @@ export default function AddingProducts() {
     color: "",
     price: "",
     model: "",
-    category:""
+    category: "",
   });
-
   // key -> 'name'
   const onChange = (key) => (e) => setForm({ ...form, [key]: e.target.value });
-  async function submit() {
+  async function add() {
     try {
       const body = form;
       console.log(body);
@@ -27,9 +26,9 @@ export default function AddingProducts() {
     }
   }
   return (
-    <div style={{marginTop:'40px'}}>
-      <form onSubmit={submit}>
-        <fieldset style={{width:'30%',margin:'auto'}}>
+    <div style={{ marginTop: "40px" }}>
+      <form onSubmit={add}>
+        <fieldset style={{ width: "30%", margin: "auto" }}>
           <legend>Insert Data</legend>
           <label htmlFor="name">Name:</label>
           <input
@@ -82,7 +81,7 @@ export default function AddingProducts() {
           <br />
           <br />
           / */}
-          <input type="submit" value="submit"   />
+          <input type="submit" value="submit" />
         </fieldset>
       </form>
     </div>
